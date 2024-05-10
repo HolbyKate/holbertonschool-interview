@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Method that determines if all the boxes can be opened."""
+
+
 def canUnlockAll(boxes):
-
-
     unlock = boxes[0]
     """First loop for the key"""
     for key in range(1, len(boxes)):

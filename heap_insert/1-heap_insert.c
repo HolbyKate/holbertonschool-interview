@@ -1,32 +1,34 @@
 #include "binary_trees.h"
 
 /**
-* height - measures the height of a tree
-*
-* @tree: tree root
-* Return: height
-*/
+ * height - measures the height of a tree
+ *
+ * @tree: tree root
+ * Return: height
+ */
 int height(const binary_tree_t *tree)
 {
     int left = 0;
     int right = 0;
+    
     if (tree == NULL)
-    return (-1);
+        return (-1);
 
     left = height(tree->left);
     right = height(tree->right);
+    
     if (left > right)
-    return (left + 1);
+        return (left + 1);
 
     return (right + 1);
 }
 
 /**
-* btree_is_perfect - checks if a binary tree is perfect
-*
-* @tree: tree root
-* Return: 1 if tree is perfect, 0 otherwise
-*/
+ * btree_is_perfect - checks if a binary tree is perfect
+ *
+ * @tree: tree root
+ * Return: 1 if tree is perfect, 0 otherwise
+ */
 int btree_is_perfect(const binary_tree_t *tree)
 {
     _Bool left_is_leaf;
@@ -57,18 +59,20 @@ int btree_is_perfect(const binary_tree_t *tree)
 }
 
 /**
-* swap - swaps nodes when child is greater than parent
-*
-* @arg_node: parent node
-* @arg_child: child node
-* Return: no return
-*/
+ * swap - swaps nodes when child is greater than parent
+ *
+ * @arg_node: parent node
+ * @arg_child: child node
+ * Return: no return
+ */
 void swap(heap_t **arg_node, heap_t **arg_child)
 {
     heap_t *node, *child, *node_child, *node_left, *node_right, *parent;
     int left_right;
 
-    node = *arg_node, child = *arg_child;
+    node = *arg_node;
+    child = *arg_child;
+
     if (child->n > node->n)
     {
         if (child->left)
@@ -76,10 +80,19 @@ void swap(heap_t **arg_node, heap_t **arg_child)
         if (child->right)
             child->right->parent = node;
         if (node->left == child)
-            node_child = node->right, left_right = 0;
+        {
+            node_child = node->right;
+            left_right = 0;
+        }
         else
-            node_child = node->left, left_right = 1;
-        node_left = child->left, node_right = child->right;
+        {
+            node_child = node->left;
+            left_right = 1;
+        }
+
+        node_left = child->left;
+        node_right = child->right;
+
         if (left_right == 0)
         {
             child->right = node_child;
@@ -94,6 +107,7 @@ void swap(heap_t **arg_node, heap_t **arg_child)
                 node_child->parent = child;
             child->right = node;
         }
+
         if (node->parent)
         {
             if (node->parent->left == node)
@@ -101,18 +115,22 @@ void swap(heap_t **arg_node, heap_t **arg_child)
             else
                 node->parent->right = child;
         }
-        parent = node->parent, child->parent = parent;
-        node->parent = child, node->left = node_left;
-        node->right = node_right, *arg_node = child;
+
+        parent = node->parent;
+        child->parent = parent;
+        node->parent = child;
+        node->left = node_left;
+        node->right = node_right;
+        *arg_node = child;
     }
 }
 
 /**
-* heap_insert - function that inserts a value in Max Binary Heap
-* @root: double pointer to the root of the heap
-* @value: value to be inserted
-* Return: pointer to the created node, or NULL on failure.
-*/
+ * heap_insert - function that inserts a value in Max Binary Heap
+ * @root: double pointer to the root of the heap
+ * @value: value to be inserted
+ * Return: pointer to the created node, or NULL on failure.
+ */
 heap_t *heap_insert(heap_t **root, int value)
 {
     heap_t *new;

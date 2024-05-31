@@ -1,15 +1,16 @@
 #!/usr/bin/python3
-"""Method that calculate the fewest number of operations"""
+"""Module that calculate the fewest number of operations"""
 
 def minOperations(n):
-    """initialize a variable to count the operations"""
+    """Calculate the minimum number of operations required to obtain n from 1"""
     if n <= 1:
         return 0
 
     operations = 0
     factorization = 2
-"""While n divisible by factorization"""
+    
     while n > 1:
+        """While n divisible by factorization"""
         while n % factorization == 0:
             operations += factorization
             n //= factorization

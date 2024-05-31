@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """Module that calculate the fewest number of operations"""
 
+
 def minOperations(n):
     """
     Calculate the minimum number of operations required to obtain n from 1
     """
-    
     if n <= 1:
         return 0
 

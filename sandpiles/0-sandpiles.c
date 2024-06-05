@@ -3,6 +3,11 @@
 
 #include "sandpiles.h"
 
+/*Declaration of prototypes*/
+int is_unstable(int grid[3][3]);
+void print_grid(int grid[3][3]);
+void toppling(int grid[3][3]);
+
 /**
  * sandpiles_sum - Computes sum of two sandpiles
  * @grid1: Left 3x3 grid

@@ -11,7 +11,7 @@
  */
 
 
-void sandpiles_sum(int grid1[3][3], int grid2[3][3]);
+void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
     int i, j;
     /*Compute the sum of the 2 sandpiles*/

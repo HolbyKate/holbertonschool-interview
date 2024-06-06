@@ -9,11 +9,11 @@ void print_grid(int grid[3][3]);
 void toppling(int grid[3][3]);
 
 /**
- * sandpiles_sum - Computes sum of two sandpiles
- * @grid1: Left 3x3 grid
- * @grid2: Right 3x3 grid
- *
- */
+* sandpiles_sum - Computes sum of two sandpiles
+* @grid1: Left 3x3 grid
+* @grid2: Right 3x3 grid
+*
+*/
 
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
@@ -36,11 +36,11 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 }
 
 /**
- * is_unstable - Checks if a sandpile is unstable
- * @grid: 3x3 grid
- *
- * Return: 1 if the sandpile is unstable, 0 otherwise
- */
+* is_unstable - Checks if a sandpile is unstable
+* @grid: 3x3 grid
+*
+* Return: 1 if the sandpile is unstable, 0 otherwise
+*/
 
 int is_unstable(int grid[3][3])
 {
@@ -62,13 +62,13 @@ int is_unstable(int grid[3][3])
 }
 
 /**
- * toppling - Performs a toppling round on a sandpile
- * @grid: 3x3 grid
- *
- * Description: This function performs a toppling round on the sandpile.
- * It topples all unstable cells and distributes the grains to the neighboring
- * cells.
- */
+* toppling - Performs a toppling round on a sandpile
+* @grid: 3x3 grid
+*
+* Description: This function performs a toppling round on the sandpile.
+* It topples all unstable cells and distributes the grains to the neighboring
+* cells.
+*/
 
 void toppling(int grid[3][3])
 {
@@ -98,10 +98,10 @@ void toppling(int grid[3][3])
     }
 }
 /**
- * print_grid - Print 3x3 grid
- * @grid: 3x3 grid
- *
- */
+* print_grid - Print 3x3 grid
+* @grid: 3x3 grid
+*
+*/
 
 void print_grid(int grid[3][3])
 {
@@ -118,4 +118,3 @@ void print_grid(int grid[3][3])
         printf("\n");
     }
 }
-

@@ -83,7 +83,7 @@ for (i = 0; i < 3; i++)
         }
     }
 
-    // Perform the toppling
+    /*Perform the toppling*/
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)

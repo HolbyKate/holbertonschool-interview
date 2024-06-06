@@ -104,7 +104,7 @@ for (i = 0; i < 3; i++)
         }
     }
 
-    // Copy the next grid back to the original grid
+   /*Copy the next grid back to the original grid*/
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)

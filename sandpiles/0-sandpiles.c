@@ -73,27 +73,43 @@ int is_unstable(int grid[3][3])
 void toppling(int grid[3][3])
 {
     int i, j;
-    int toppled[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+    int next_grid[3][3];
 
+for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            next_grid[i][j] = grid[i][j];
+        }
+    }
+
+    // Perform the toppling
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 3; j++)
         {
-            /*if cell has more than 3 grains you must topple it*/
             if (grid[i][j] > 3)
             {
-                toppled[i][j] = 1;
-                grid[i][j] -= 4;
+                next_grid[i][j] -= 4;
 
                 if (i > 0)
-                    grid[i - 1][j]++;
+                    next_grid[i - 1][j]++;
                 if (i < 2)
-                    grid[i + 1][j]++;
+                    next_grid[i + 1][j]++;
                 if (j > 0)
-                    grid[i][j - 1]++;
+                    next_grid[i][j - 1]++;
                 if (j < 2)
-                    grid[i][j + 1]++;
+                    next_grid[i][j + 1]++;
             }
+        }
+    }
+
+    // Copy the next grid back to the original grid
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            grid[i][j] = next_grid[i][j];
         }
     }
 }

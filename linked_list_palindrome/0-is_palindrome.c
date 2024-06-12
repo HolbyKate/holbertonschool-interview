@@ -52,4 +52,25 @@ int is_palindrome(listint_t **head)
     second_half = slow;
     prev_slow->next = NULL;
     second_half = reverse_list(&second_half);
+
+    while (second_half != NULL)
+    {
+        if ((*head)->n != second_half->n)
+        {
+            is_pal = 0;
+            break;
+        }
+        *head = (*head)->next;
+        second_half = second_half->next;
+    }
+
+    if (mid != NULL)
+    {
+        prev_slow->next = mid;
+        mid->next = second_half;
+    }
+    else
+        prev_slow->next = second_half;
+
+    return (is_pal);
 }

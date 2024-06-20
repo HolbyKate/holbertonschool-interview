@@ -10,6 +10,7 @@ gracefully.
 """
 
 import sys
+"""Import sys"""
 
 
 def parse_logs():

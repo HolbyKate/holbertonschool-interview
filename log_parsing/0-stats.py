@@ -13,15 +13,18 @@ def parse_logs():
     line_count = 0
 
     try:
+        """Read stdin"""
         for line in sys.stdin:
             parts = line.split()
             if len(parts) < 2:
                 continue
 
             try:
+                """Compute metrics"""
                 status_code = int(parts[-2])
                 file_size = int(parts[-1])
             except ValueError:
+                """interruption"""
                 continue
 
             total_size += file_size
@@ -36,9 +39,11 @@ def parse_logs():
                         print(f"{code}: {status_codes[code]}")
 
     except KeyboardInterrupt:
+        """Keyboard interruption and print"""
         print("\nInterrupted")
 
     finally:
+        """print"""
         print("Total file size:", total_size)
         for code in sorted(status_codes.keys()):
             if status_codes[code] > 0:

@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-import sys
-
 """Module to parse logs and report statistics on HTTP status
 codes and total file size."""
+
+import sys
 
 
 def parse_logs():

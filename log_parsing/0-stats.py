@@ -1,69 +1,74 @@
 #!/usr/bin/python3
 """
-Module to parse logs and report statistics on HTTP status
-codes and total file size.
-
-This module reads from stdin, processes each log entry to compute
-the total file size and count of different HTTP status codes.
-It prints the statistics every 10 lines and handles interruptions
-gracefully.
+A script that reads stdin line by line and computes metrics:
+- Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1"
+<status code> <file size>
+- After every 10 lines and/or a keyboard interruption (CTRL + C),
+prints statistics:
+  * Total file size: File size: <total size>
+  * Number of lines by status code in ascending order
+Possible status codes: 200, 301, 400, 401, 403, 404, 405, and 500
+If the format is not as expected, the line is skipped.
 """
 
 import sys
 
 
-def parse_logs():
+def print_stats(total_size, status_counts):
     """
-    Parse logs from stdin and print statistics.
-
-    It reads each line from stdin, extracts the HTTP status code and file size,
-    updates the total file size and counts of different status codes. Every 10
-    lines, it prints the current statistics. It handles KeyboardInterrupt to
-    print the final statistics before exiting.
-
-    The expected log line format:
-    <other data> <status_code> <file_size>
-
-    Example:
-    127.0.0.1 - - [2023-06-20 13:55:36] "GET /index.html HTTP/1.1" 200 1024
+    Prints the total file size and the number of lines for each status code.
     """
+    print(f"File size: {total_size}")
+    for status_code in sorted(status_counts.keys()):
+        if status_counts[status_code] > 0:
+            print(f"{status_code}: {status_counts[status_code]}")
+
+
+def parse_line(line):
+    """
+    Parses a line of the log and returns the status code and file size if valid
+    """
+    parts = line.split()
+    if len(parts) < 9:
+        return None, None
+
+    try:
+        status_code = int(parts[-2])
+        file_size = int(parts[-1])
+    except (ValueError, IndexError):
+        return None, None
+
+    return status_code, file_size
+
+
+def main():
+    """Main function to read stdin and compute the required metrics."""
     total_size = 0
-    status_codes = {200: 0, 301: 0, 400: 0,
-                    401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+    status_counts = {200: 0, 301: 0, 400: 0, 401: 0,
+                     403: 0, 404: 0, 405: 0, 500: 0}
     line_count = 0
 
     try:
         for line in sys.stdin:
-            parts = line.split()
-            if len(parts) < 2:
-                continue
-
-            try:
-                status_code = int(parts[-2])
-                file_size = int(parts[-1])
-            except ValueError:
+            status_code, file_size = parse_line(line)
+            if status_code is None or file_size is None:
                 continue
 
             total_size += file_size
-            if status_code in status_codes:
-                status_codes[status_code] += 1
+            if status_code in status_counts:
+                status_counts[status_code] += 1
+
             line_count += 1
 
             if line_count % 10 == 0:
-                print("Total file size:", total_size)
-                for code in sorted(status_codes.keys()):
-                    if status_codes[code] > 0:
-                        print(f"{code}: {status_codes[code]}")
+                print_stats(total_size, status_counts)
 
     except KeyboardInterrupt:
-        print("\nInterrupted")
+        print_stats(total_size, status_counts)
+        raise
 
-    finally:
-        print("Total file size:", total_size)
-        for code in sorted(status_codes.keys()):
-            if status_codes[code] > 0:
-                print(f"{code}: {status_codes[code]}")
+    print_stats(total_size, status_counts)
 
 
 if __name__ == "__main__":
-    parse_logs()
+    main()

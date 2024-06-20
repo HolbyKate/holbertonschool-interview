@@ -10,12 +10,11 @@ gracefully.
 """
 
 import sys
-"""Import sys"""
 
 
 def parse_logs():
     """
-    Function to parse logs from stdin and print statistics.
+    Parse logs from stdin and print statistics.
 
     It reads each line from stdin, extracts the HTTP status code and file size,
     updates the total file size and counts of different status codes. Every 10
@@ -34,18 +33,15 @@ def parse_logs():
     line_count = 0
 
     try:
-        """Read from stdin"""
         for line in sys.stdin:
             parts = line.split()
             if len(parts) < 2:
                 continue
 
             try:
-                """Compute metrics"""
                 status_code = int(parts[-2])
                 file_size = int(parts[-1])
             except ValueError:
-                """Skip lines with invalid data"""
                 continue
 
             total_size += file_size
@@ -60,11 +56,9 @@ def parse_logs():
                         print(f"{code}: {status_codes[code]}")
 
     except KeyboardInterrupt:
-        """Handle Keyboard interruption and print final statistics"""
         print("\nInterrupted")
 
     finally:
-        """Print final statistics"""
         print("Total file size:", total_size)
         for code in sorted(status_codes.keys()):
             if status_codes[code] > 0:

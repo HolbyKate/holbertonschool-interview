@@ -3,7 +3,7 @@
 #include <math.h>
 
 /*
- * is_empty - Determinate if a given position should be empty
+ * is_empty - Determine if a given position should be empty
  * @raw: the raw
  * @column: the column
  *

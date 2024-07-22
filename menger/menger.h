@@ -7,4 +7,4 @@
 
 void menger(int level);
 
-#endif
+#endif /* MENGER_H */

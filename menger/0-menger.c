@@ -12,7 +12,9 @@
  * and checking if the current position is in the middle third.
  *
  * Return: 1 if position is empty else 0
+ *
  */
+
 int is_empty(int row, int column)
 {
 	while (row > 0 || column > 0)

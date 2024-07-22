@@ -10,7 +10,7 @@
  */
 
 int is_empty(int row, int column)
-	/*Check all level*/
+/*Check all level*/
 {
 	while (row > 0 || column > 0)
 		/*Check if he current position at any level is in the middle third*/

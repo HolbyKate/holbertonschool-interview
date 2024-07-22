@@ -6,15 +6,18 @@
  * is_empty - Determinate if a gyven psition should be empty
  * @column: the column
  * @raw: the raw
- * Return: & if position is empty else 0
+ * Return: 1 if position is empty else 0
  */
 
 int is_empty(int row, int column)
+/*Check all level*/
 {
     while (row > 0 || column > 0)
+    /*Check if he current position at any level is in the middle third*/
     {
         if (row % 3 == 1 && column % 3 == 1)
             return 1;
+        /*Move to the next level*/
         row /= 3;
         column /= 3;
     }
@@ -39,10 +42,10 @@ void menger(int level)
         for (column = 0; column < size; column++)
         {
             if (is_empty(row, column))
-                printf(" ");
+                printf(" "); /* empty position*/
             else
-                printf("#");
+                printf("#"); /*filled position*/
         }
-        printf("\n");
+        printf("\n"); /*move to the next line*/
     }
 }

@@ -4,19 +4,19 @@
 
 /*
  * is_empty - Determinate if a gyven psition should be empty
- * @col: the column
+ * @column: the column
  * @raw: the raw
  * Return: & if position is empty else 0
  */
 
-int is_empty(int row, int col)
+int is_empty(int row, int column)
 {
-    while (row > 0 || col > 0)
+    while (row > 0 || column > 0)
     {
-        if (row % 3 == 1 && col % 3 == 1)
+        if (row % 3 == 1 && column % 3 == 1)
             return 1;
         row /= 3;
-        col /= 3;
+        column /= 3;
     }
     return 0;
 }
@@ -27,7 +27,7 @@ int is_empty(int row, int col)
  */
 void menger(int level)
 {
-    int size, row, col;
+    int size, row, column;
 
     if (level < 1)
         return;
@@ -36,9 +36,9 @@ void menger(int level)
 
     for (row = 0; row < size; row++)
     {
-        for (col = 0; col < size; col++)
+        for (column = 0; column < size; column++)
         {
-            if (is_empty(row, col))
+            if (is_empty(row, column))
                 printf(" ");
             else
                 printf("#");

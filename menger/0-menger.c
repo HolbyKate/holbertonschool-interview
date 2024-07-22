@@ -10,18 +10,18 @@
  */
 
 int is_empty(int row, int column)
-/*Check all level*/
+	/*Check all level*/
 {
-    while (row > 0 || column > 0)
-    /*Check if he current position at any level is in the middle third*/
-    {
-        if (row % 3 == 1 && column % 3 == 1)
-            return 1;
-        /*Move to the next level*/
-        row /= 3;
-        column /= 3;
-    }
-    return 0;
+	while (row > 0 || column > 0)
+		/*Check if he current position at any level is in the middle third*/
+	{
+		if (row % 3 == 1 && column % 3 == 1)
+			return 1;
+		/*Move to the next level*/
+		row /= 3;
+		column /= 3;
+	}
+	return 0;
 }
 
 /**
@@ -30,22 +30,22 @@ int is_empty(int row, int column)
  */
 void menger(int level)
 {
-    int size, row, column;
+	int size, row, column;
 
-    if (level < 1)
-        return;
+	if (level < 1)
+		return;
 
-    size = pow(3, level);
+	size = pow(3, level);
 
-    for (row = 0; row < size; row++)
-    {
-        for (column = 0; column < size; column++)
-        {
-            if (is_empty(row, column))
-                printf(" "); /* empty position*/
-            else
-                printf("#"); /*filled position*/
-        }
-        printf("\n"); /*move to the next line*/
-    }
+	for (row = 0; row < size; row++)
+	{
+		for (column = 0; column < size; column++)
+		{
+			if (is_empty(row, column))
+				printf(" "); /* empty position*/
+			else
+				printf("#"); /*filled position*/
+		}
+		printf("\n"); /*move to the next line*/
+	}
 }

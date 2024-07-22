@@ -4,8 +4,8 @@
 
 /*
  * is_empty - Determinate if a given position should be empty
- * @column: the column
  * @raw: the raw
+ * @column: the column
  *
  * This function checks if a given position in a Menger Sponge at a certain
  * level is empty or filled. It does so by iterating through each level
@@ -13,13 +13,11 @@
  *
  * Return: 1 if position is empty else 0
  */
-
 int is_empty(int row, int column)
 {
-    /*Check all level*/
 	while (row > 0 || column > 0)
 	{
-        /*Check if he current position at any level is in the middle third*/
+		/*Check if he current position at any level is in the middle third*/
 		if (row % 3 == 1 && column % 3 == 1)
 			return (1);
 		/*Move to the next level*/

@@ -2,20 +2,21 @@
 #include <stdlib.h>
 #include <math.h>
 
-/*
- * is_empty - Determine if a given position should be empty
- * @raw: the raw
- * @column: the column
- *
- * This function checks if a given position in a Menger Sponge at a certain
- * level is empty or filled. It does so by iterating through each level
- * and checking if the current position is in the middle third.
- *
- * Return: 1 if position is empty else 0
- *
- */
+/**
+* is_empty - Determine if a given position should be empty
+* @row: the row
+* @column: the column
+*
+* This function checks if a given position in a Menger Sponge at a certain
+* level is empty or filled. It does so by iterating through each level
+* and checking if the current position is in the middle third.
+*
+* Return: 1 if position is empty else 0
+*
+*/
 
 int is_empty(int row, int column)
+
 {
 	while (row > 0 || column > 0)
 	{
@@ -30,14 +31,14 @@ int is_empty(int row, int column)
 }
 
 /**
- * menger - Draws a 2D Menger Sponge
- * @level: The level of the Menger Sponge to draw
- *
- * This function prints a 2D representation of a Menger Sponge of given level.
- * It calculates the size of the sponge, iterates over each position, and
- * determines whether it should be empty or filled by calling
- * the is_empty function.
- */
+* menger - Draws a 2D Menger Sponge
+* @level: The level of the Menger Sponge to draw
+*
+* This function prints a 2D representation of a Menger Sponge of given level.
+* It calculates the size of the sponge, iterates over each position, and
+* determines whether it should be empty or filled by calling
+* the is_empty function.
+*/
 void menger(int level)
 {
 	int size, row, column;

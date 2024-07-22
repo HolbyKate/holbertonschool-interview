@@ -1,12 +1,12 @@
-##Project badge
-Menger sponge
+
+## Menger sponge
 The Menger sponge, sometimes called the Menger-Sierpinski sponge, is a fractal solid. It is the third-dimensional extension of the Cantor set and the Sierpiński mat. It was first described by Austrian mathematician Karl Menger
 
-## ## Requirements
+## Requirements
 
-### ### General
+### General
 
-* - Allowed editors: `vi`, `vim`, `emacs`
+- Allowed editors: `vi`, `vim`, `emacs`
 - All your files will be compiled on Ubuntu 14.04 LTS
 - Your programs and functions will be compiled with `gcc 4.8.4` using the flags `-Wall` `-Werror` `-Wextra` and `-pedantic`
 - All your files should end with a new line

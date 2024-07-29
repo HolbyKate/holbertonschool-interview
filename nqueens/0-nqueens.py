@@ -2,6 +2,7 @@
 
 import sys
 
+
 def is_safe(board, row, col, n):
     # Check this row on left side
     for i in range(col):

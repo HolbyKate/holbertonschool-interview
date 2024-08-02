@@ -21,6 +21,7 @@ def is_safe(board, row, col, n):
 
     return True
 
+
 def solve_nqueens(n):
     # If all columns have been processed, a solution has been found
     board = [[0 for _ in range(n)] for _ in range(n)]

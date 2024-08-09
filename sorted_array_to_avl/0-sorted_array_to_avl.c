@@ -3,7 +3,7 @@
 #include "binary_trees.h"
 
 /**
- * sorted_array_to_avl_helper - Recursively builds an AVL tree from a sorted array
+ * sorted_array_to_avl_helper - Recursively builds AVL tree from sorted array
  * @array: Pointer to the first element of the array
  * @start: Starting index of the subarray
  * @end: Ending index of the subarray

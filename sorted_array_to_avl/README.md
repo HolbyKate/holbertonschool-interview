@@ -1,7 +1,7 @@
-* Array to AVL
+# Array to AVL
 
-** Requirements
-*** General
+## Requirements
+### General
 
 - Allowed editors: `vi, vim, emacs`
 - All your files will be compiled on Ubuntu 14.04 LTS
@@ -17,11 +17,11 @@
 - Don’t forget to push your header file
 - All your header files should be include guarded
 
-** More info
-*** Data structures
+## More info
+### Data structures
 Please use the following data structures and types for binary trees. Don’t forget to include them in your header file.
 
-*** Basic Binary Tree
+### Basic Binary Tree
 
 ```
 /**
@@ -43,11 +43,11 @@ struct binary_tree_s
 typedef struct binary_tree_s binary_tree_t;
 ```
 
-*** AVL Tree
+### AVL Tree
 ````
 typedef struct binary_tree_s avl_t;
 ````
-*** Print function
+### Print function
 To match the examples in the tasks, you are given this [function](https://github.com/hs-hq/0x1C.c)
 
 This function is used only for visualisation purpose. You don’t have to push it to your repo. It may not be used during the correction

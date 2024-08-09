@@ -1,5 +1,5 @@
-#ifndef BINARY_TREES_H
-#define BINARY_TREES_H
+#ifndef _BINARY_TREES_H
+#define _BINARY_TREES_H
 
 /**
  * struct binary_tree_s - Binary tree node
@@ -18,4 +18,4 @@ struct binary_tree_s
 };
 typedef struct binary_tree_s binary_tree_t;
 
-#endif /* BINARY_TREES_H */
+#endif /* _BINARY_TREES_H */

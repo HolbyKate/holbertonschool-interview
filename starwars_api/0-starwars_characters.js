@@ -1,9 +1,9 @@
 #!/usr/bin/node
 
-const request = require("request");
+const request = require('request');
 
 // Fetches a character's name from the given URL.
-function fetchCharacter(url) {
+function fetchCharacter (url) {
   return new Promise((resolve, reject) => {
     request(url, (error, response, body) => {
       if (error) {
@@ -15,7 +15,7 @@ function fetchCharacter(url) {
 }
 
 // Retrieves and prints the names of all characters in a Star Wars movie.
-async function getCharacterNames(movieId) {
+async function getCharacterNames (movieId) {
   const movieUrl = `https://swapi-api.hbtn.io/api/films/${movieId}/`;
 
   request(movieUrl, async (error, response, body) => {
@@ -43,7 +43,7 @@ const movieId = process.argv[2];
 
 // Check if a movie ID was provided
 if (!movieId) {
-  console.error("Please provide a movie ID as a command-line argument.");
+  console.error('Please provide a movie ID as a command-line argument.');
   process.exit(1);
 }
 

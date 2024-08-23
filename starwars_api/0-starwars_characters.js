@@ -15,7 +15,6 @@ function fetchCharacter (url) {
 }
 
 // Retrieves and prints the names of all characters in a Star Wars movie.
-
 async function getCharacterNames (movieId) {
     const movieUrl = `https://swapi-api.hbtn.io/api/films/${movieId}/`;
 

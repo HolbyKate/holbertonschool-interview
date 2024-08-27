@@ -12,7 +12,7 @@
 - All modules and functions must be documented
 - All your files must be executable
 
-````
+```
 cat 0_main.py
 #!/usr/bin/python3
 """
@@ -31,8 +31,8 @@ jesse@ubuntu:~/$ ./0_main.py
 6
 ```
 Visual representation of the walls [0, 1, 0, 2, 0, 3, 0, 4]
-[Image1]
+[Image1](https://github.com/HolbyKate/holbertonschool-interview/blob/main/rain/image1.png)
 
 
 Visual representation of the walls [2, 0, 0, 4, 0, 0, 1, 0]
-[Image2]
+[Image2](https://github.com/HolbyKate/holbertonschool-interview/blob/main/rain/image2.png)

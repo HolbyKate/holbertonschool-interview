@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-# Return: Integer indicating total amount of rainwater retained.
+"""
+0-rain module
+This module contains a function to calculate the amount of rainwater
+retained between walls of different heights.
+"""
 
 def rain(walls):
     """

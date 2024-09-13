@@ -22,7 +22,7 @@ void print_array(int *array, size_t left, size_t right)
 }
 
 /**
- * recursive_binary - Helper function for advanced_binary to perform recursive search
+ * recursive_binary - Helper function for advanced_binary to perform
  * @array: Pointer to the first element of the array to search in
  * @left: The starting index of the subarray to search
  * @right: The ending index of the subarray to search
@@ -40,21 +40,15 @@ int recursive_binary(int *array, size_t left, size_t right, int value)
 
 	mid = left + (right - left) / 2;
 
-	if (array[mid] == value)
-	{
-		if (mid == left || array[mid - 1] != value)
-			return (mid);
-		else
-			return (recursive_binary(array, left, mid - 1, value));
-	}
-	else if (array[mid] > value)
-	{
-		return (recursive_binary(array, left, mid - 1, value));
-	}
-	else
-	{
-		return (recursive_binary(array, mid + 1, right, value)); // This line is correct
-	}
+	if (array[mid] == value && (mid == left || array[mid - 1] != value))
+		return (mid);
+
+	/* Keep searching the left half */
+	if (array[mid] >= value)
+		return (recursive_binary(array, left, mid, value));
+
+	/* Keep searching in the right half */
+	return (recursive_binary(array, mid + 1, right, value));
 }
 
 /**

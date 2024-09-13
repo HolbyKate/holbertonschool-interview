@@ -53,7 +53,7 @@ int recursive_binary(int *array, size_t left, size_t right, int value)
 	}
 	else
 	{
-		return (recursive_binary(array, mid + 1, right, value));
+		return (recursive_binary(array, mid + 1, right, value)); // This line is correct
 	}
 }
 

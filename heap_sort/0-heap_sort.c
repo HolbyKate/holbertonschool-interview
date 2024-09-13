@@ -1,68 +1,69 @@
-#include "sort.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include "sort.h"
 
 /**
- * swap - Swaps two integers in an array
- * @a: The first integer
- * @b: The second integer
+ * swap - Swap two elements in an array
+ *
+ * @array: The array to be sorted
+ * @i: The index of the first element
+ * @j: The index of the second element
  */
-void swap(int *a, int *b)
+void swap(int *array, size_t i, size_t j)
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
+	int temp = array[i];
+	array[i] = array[j];
+	array[j] = temp;
 }
 
 /**
- * sift_down - Restores the heap property in a subtree
+ * sift_down - Sift down the element at index i in a max heap
+ *
  * @array: The array representing the heap
- * @start: The index of the root of the subtree
- * @end: The index of the last element of the heap
- * @size: The total size of the array (used for printing)
+ * @size: Total size of the array
+ * @n: Size of the heap portion of the array
+ * @i: The index of the element to sift down
  */
-void sift_down(int *array, size_t start, size_t end, size_t size)
+void sift_down(int *array, size_t size, size_t n, size_t i)
 {
-	size_t root = start;
-	size_t child;
-	size_t swap_idx;
+	size_t largest = i;
+	size_t left = 2 * i + 1;
+	size_t right = 2 * i + 2;
 
-	while ((child = 2 * root + 1) <= end)
+	if (left < n && array[left] > array[largest])
+		largest = left;
+
+	if (right < n && array[right] > array[largest])
+		largest = right;
+
+	if (largest != i)
 	{
-		swap_idx = root;
-
-		if (array[swap_idx] < array[child])
-			swap_idx = child;
-		if (child + 1 <= end && array[swap_idx] < array[child + 1])
-			swap_idx = child + 1;
-		if (swap_idx == root)
-			return;
-
-		swap(&array[root], &array[swap_idx]);
+		swap(array, i, largest);
 		print_array(array, size);
-		root = swap_idx;
+
+		sift_down(array, size, n, largest);
 	}
 }
 
 /**
- * heap_sort - Sorts an array of integers in
- * ascending order using Heap sort
+ * heap_sort - Sort an array of integers in ascending order using Heap sort
+ *
  * @array: The array to be sorted
- * @size: The number of elements in the array
+ * @size: Size of the array
  */
 void heap_sort(int *array, size_t size)
 {
-	size_t start, end;
-
-	if (size < 2)
+	if (array == NULL || size < 2)
 		return;
 
-	for (start = (size - 2) / 2; (int)start >= 0; start--)
-		sift_down(array, start, size - 1, size);
+	for (size_t i = (size / 2) - 1; i >= 0; i--)
+		sift_down(array, size, size, i);
 
-	for (end = size - 1; end > 0; end--)
+	for (size_t i = size - 1; i > 0; i--)
 	{
-		swap(&array[0], &array[end]);
+		swap(array, 0, i);
 		print_array(array, size);
-		sift_down(array, 0, end - 1, size);
+
+		sift_down(array, size, i, 0);
 	}
 }

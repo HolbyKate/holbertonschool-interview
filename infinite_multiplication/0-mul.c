@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-
 /**
  * _print_error - Prints error and exits.
  */

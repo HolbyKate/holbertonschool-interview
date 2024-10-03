@@ -1,13 +1,28 @@
 #include "holberton.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
+
+/**
+ * _putchar - Writes a character to stdout.
+ * @c: The character to print.
+ * Return: On success 1, on error -1.
+ */
+int _putchar(char c)
+{
+	return write(1, &c, 1);
+}
 
 /**
  * _print_error - Prints error and exits.
  */
 void _print_error(void)
 {
-	puts("Error");
+	if (write(2, "Error\n", 6) == -1)
+	{
+		// If writing to stderr fails, exit with a different code
+		exit(99);
+	}
 	exit(98);
 }
 
@@ -18,6 +33,9 @@ void _print_error(void)
  */
 int _isdigit(char *s)
 {
+	if (s == NULL)
+		return (0);
+
 	while (*s)
 	{
 		if (*s < '0' || *s > '9')
@@ -35,6 +53,9 @@ int _isdigit(char *s)
 int _strlen(char *s)
 {
 	int len = 0;
+
+	if (s == NULL)
+		return (0);
 
 	while (s[len])
 		len++;
@@ -78,9 +99,12 @@ void multiply(char *num1, char *num2)
 	else
 	{
 		for (; i < len1 + len2; i++)
-			_putchar(result[i] + '0');
+			if (_putchar(result[i] + '0') == -1)
+				_print_error();
 	}
-	_putchar('\n');
+	if (_putchar('\n') == -1)
+		_print_error();
+
 	free(result);
 }
 

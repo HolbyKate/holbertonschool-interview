@@ -30,7 +30,7 @@ int _isdigit(char *s)
 
 	while (*s)
 	{
-		if (*s < '0' || *s > '9')
+		if (!isdigit(*s))
 			return (0);
 		s++;
 	}
@@ -87,15 +87,27 @@ void multiply(char *num1, char *num2)
 		i++;
 
 	if (i == len1 + len2)
-		_putchar('0');
+	{
+		if (_putchar('0') == -1)
+		{
+			free(result);
+			_print_error();
+		}
+	}
 	else
 	{
 		for (; i < len1 + len2; i++)
 			if (_putchar(result[i] + '0') == -1)
+			{
+				free(result);
 				_print_error();
+			}
 	}
 	if (_putchar('\n') == -1)
+	{
+		free(result);
 		_print_error();
+	}
 
 	free(result);
 }

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <ctype.h>
+#include <string.h>
 
 /**
  * _print_error - Prints error and exits.

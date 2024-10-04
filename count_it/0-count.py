@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 
 import requests
+"""
+    queries the Reddit API,
+    parses the title of all hot articles,
+    and prints a sorted count of given keywords
+    """
 
 
 def count_words(subreddit, word_list, after=None, word_count=None):
@@ -51,7 +56,7 @@ def print_sorted_counts(word_count):
     filtered_counts = {word: count for word,
                        count in word_count.items() if count > 0}
 
-    # Sort the results first by count (descending), then alphabetically (ascending)
+    # Sort the results first by count
     sorted_counts = sorted(filtered_counts.items(),
                            key=lambda x: (-x[1], x[0]))
 

@@ -1,5 +1,9 @@
 #include "holberton.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <ctype.h>
+#include <string.h>
 
 /**
  * main - Multiplies two positive numbers.

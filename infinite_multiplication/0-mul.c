@@ -6,46 +6,7 @@
 #include <string.h>
 
 /**
- * main - Multiplies two positive numbers.
- * @argc: Number of arguments.
- * @argv: Array of arguments.
- *
- * Return: 0 on success, 98 on error.
- */
-int main(int argc, char *argv[])
-{
-	validate_input(argc, argv);
-
-	char *num1 = argv[1];
-	char *num2 = argv[2];
-	char *result = multiply_numbers(num1, num2);
-
-	if (!result)
-		_print_error();
-
-	print_result(result, get_length(result));
-
-	free(result);
-	return (0);
-}
-
-/**
- * _print_error - Prints an error message and exits with status 98.
- */
-void _print_error(void)
-{
-	char *error = "Error\n";
-
-	while (*error)
-	{
-		_putchar(*error);
-		error++;
-	}
-	exit(98);
-}
-
-/**
- * is_digit - Checks if a string is composed of only digits.
+ * is_digit - Checks if a string contains only digits.
  * @s: The string to check.
  *
  * Return: 1 if all characters are digits, 0 otherwise.
@@ -64,116 +25,148 @@ int is_digit(char *s)
 }
 
 /**
- * _calloc - Allocates memory for an array using malloc and sets it to zero.
- * @nmemb: Number of elements in the array.
- * @size: Size of each element.
- *
- * Return: Pointer to the allocated memory or NULL if it fails.
- */
-void *_calloc(unsigned int nmemb, unsigned int size)
-{
-	unsigned int i;
-	char *p;
-
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-
-	p = malloc(nmemb * size);
-	if (p == NULL)
-		return (NULL);
-
-	for (i = 0; i < (nmemb * size); i++)
-		p[i] = 0;
-
-	return (p);
-}
-
-/**
- * validate_input - Validates the input arguments.
- * @argc: Number of arguments.
- * @argv: Array of arguments.
- */
-void validate_input(int argc, char *argv[])
-{
-	if (argc != 3)
-		_print_error();
-
-	if (!is_digit(argv[1]) || !is_digit(argv[2]))
-		_print_error();
-}
-
-/**
- * get_length - Returns the length of a string.
- * @s: The string to calculate the length of.
+ * _strlen - Calculates the length of a string.
+ * @s: The string.
  *
  * Return: The length of the string.
  */
-int get_length(char *s)
+int _strlen(char *s)
 {
 	int len = 0;
 
 	while (s[len])
 		len++;
-
 	return (len);
 }
 
 /**
- * multiply_numbers - Multiplies two numbers given as strings.
- * @num1: The first number.
- * @num2: The second number.
- *
- * Return: Pointer to the resulting string of the multiplication.
+ * _multiply - Multiplies two digits and adds the result to the appropriate position.
+ * @num1: The first string of digits.
+ * @num2: The second string of digits.
+ * @result: The result array.
  */
-char *multiply_numbers(char *num1, char *num2)
+void _multiply(char *num1, char *num2, int *result)
 {
-	int len1 = get_length(num1);
-	int len2 = get_length(num2);
-	int len_res = len1 + len2;
-	char *result = _calloc(len_res + 1, sizeof(char));
-	int i, j, carry, prod;
-
-	if (result == NULL)
-		return (NULL);
-
-	for (i = 0; i < len_res; i++)
-		result[i] = '0';
+	int len1 = _strlen(num1);
+	int len2 = _strlen(num2);
+	int i, j, mul, sum;
 
 	for (i = len1 - 1; i >= 0; i--)
 	{
-		carry = 0;
 		for (j = len2 - 1; j >= 0; j--)
 		{
-			prod = (num1[i] - '0') * (num2[j] - '0') +
-				   (result[i + j + 1] - '0') + carry;
-
-			carry = prod / 10;
-			result[i + j + 1] = (prod % 10) + '0';
+			mul = (num1[i] - '0') * (num2[j] - '0');
+			sum = mul + result[i + j + 1];
+			result[i + j + 1] = sum % 10;
+			result[i + j] += sum / 10;
 		}
-		result[i + j + 1] += carry;
 	}
-
-	return (result);
 }
 
 /**
- * print_result - Prints the result of the multiplication.
- * @result: The result string.
- * @len_res: Length of the result string.
+ * mul - Multiplies two positive numbers.
+ * @num1: The first string of digits.
+ * @num2: The second string of digits.
+ *
+ * Return: The resulting multiplication string.
  */
-void print_result(char *result, int len_res)
+char *mul(char *num1, char *num2)
 {
-	int i = 0;
+	int len1 = _strlen(num1);
+	int len2 = _strlen(num2);
+	int len = len1 + len2;
+	int *result;
+	char *str;
+	int i;
+	int start = 0;
 
-	while (i < len_res && result[i] == '0')
-		i++;
+	result = malloc(sizeof(int) * len);
+	if (result == NULL)
+		return (NULL);
 
-	if (i == len_res)
-		_putchar('0');
-	else
+	for (i = 0; i < len; i++)
+		result[i] = 0;
+
+	_multiply(num1, num2, result);
+
+	/* Allocate the resulting string */
+	str = malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
 	{
-		while (i < len_res)
-			_putchar(result[i++]);
+		free(result);
+		return (NULL);
 	}
+
+	/* Convert the results to characters */
+	for (i = 0; i < len; i++)
+		str[i] = result[i] + '0';
+	str[len] = '\0';
+
+	free(result);
+
+	/* Remove leading zeros */
+	while (str[start] == '0' && start < len - 1)
+		start++;
+
+	/* Shift the string to remove leading zeros */
+	for (i = 0; i < len - start; i++)
+		str[i] = str[i + start];
+	str[i] = '\0';
+
+	return (str);
+}
+
+/**
+ * main - Entry point of the program.
+ * @argc: Number of arguments.
+ * @argv: Array of arguments.
+ *
+ * Return: 0 on success, 98 on error.
+ */
+int main(int argc, char *argv[])
+{
+	char *result;
+	int i; /* Declaration of 'i' to be used in the for loop */
+
+	if (argc != 3)
+	{
+		_putchar('E');
+		_putchar('r');
+		_putchar('r');
+		_putchar('o');
+		_putchar('r');
+		_putchar('\n');
+		exit(98);
+	}
+
+	if (!is_digit(argv[1]) || !is_digit(argv[2]))
+	{
+		_putchar('E');
+		_putchar('r');
+		_putchar('r');
+		_putchar('o');
+		_putchar('r');
+		_putchar('\n');
+		exit(98);
+	}
+
+	result = mul(argv[1], argv[2]);
+	if (result == NULL)
+	{
+		_putchar('E');
+		_putchar('r');
+		_putchar('r');
+		_putchar('o');
+		_putchar('r');
+		_putchar('\n');
+		exit(98);
+	}
+
+	/* Display the result */
+	for (i = 0; result[i]; i++)
+		_putchar(result[i]);
 	_putchar('\n');
+
+	free(result);
+	return (0);
 }

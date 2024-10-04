@@ -1,13 +1,13 @@
-#ifndef _HOLBERTON_H_
-#define _HOLBERTON_H_
+#ifndef HOLBERTON_H
+#define HOLBERTON_H
 
-#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
+/* Prototype of mul function*/
+char *mul(char *num1, char *num2);
+
+/* Prototype of_putchar function*/
 int _putchar(char c);
-void _print_error(void);
-int _isdigit(char *s);
-void multiply(char *num1, char *num2);
-int _strlen(char *s);
-void _puts(char *s);
 
-#endif /* _HOLBERTON_H_ */
+#endif /* HOLBERTON_H */

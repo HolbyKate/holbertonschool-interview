@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdlib.h>
 
 /**
  * add_nodeint - Adds a new node at the beginning of a listint_t list.
@@ -35,9 +36,9 @@ size_t print_listint_safe(const listint_t *head)
 
 	while (current)
 	{
-		printf("%d\n", current->n);
-		count++;
-		current = current->next;
+		custom_print(current->n);
+        count++;
+        current = current->next;
 	}
 	return (count);
 }
@@ -74,7 +75,6 @@ listint_t *find_listint_loop(listint_t *head)
 	listint_t *tortoise = head;
 	listint_t *hare = head;
 
-	while (hare != NULL && hare->next != NULL)
 	{
 		tortoise = tortoise->next;
 		hare = hare->next->next;

@@ -1,5 +1,6 @@
 #include "lists.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 /**
  * add_nodeint - Adds a new node at the beginning of a listint_t list.
@@ -8,19 +9,48 @@
  *
  * Return: Address of the new element, or NULL if it failed.
  */
+
+void custom_putc(char c)
+{
+    write(1, &c, 1);
+}
+
+void custom_print(int n)
+{
+    char buffer[12];
+    int i = 0, j, digit;
+
+    if (n < 0)
+    {
+        n = -n;
+        buffer[i++] = '-';
+    }
+
+    do
+    {
+        digit = n % 10;
+        buffer[i++] = digit + '0';
+        n /= 10;
+    } while (n > 0);
+
+    for (j = (buffer[0] == '-' ? 1 : 0); j < i; j++)
+        custom_putc(buffer[i - j - 1]);
+    custom_putc('\n');
+}
+
 listint_t *add_nodeint(listint_t **head, const int n)
 {
-	listint_t *new_node;
+    listint_t *new_node;
 
     new_node = (listint_t *)malloc(sizeof(listint_t));
-	if (!new_node)
-		return (NULL);
+    if (!new_node)
+        return (NULL);
 
-	new_node->n = n;
-	new_node->next = *head;
-	*head = new_node;
+    new_node->n = n;
+    new_node->next = *head;
+    *head = new_node;
 
-	return (new_node);
+    return (new_node);
 }
 
 /**
@@ -31,16 +61,16 @@ listint_t *add_nodeint(listint_t **head, const int n)
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	const listint_t *current = head;
-	size_t count = 0;
+    const listint_t *current = head;
+    size_t count = 0;
 
-	while (current)
-	{
-		custom_print(current->n);
+    while (current)
+    {
+        custom_print(current->n);
         count++;
         current = current->next;
-	}
-	return (count);
+    }
+    return (count);
 }
 
 /**
@@ -51,17 +81,17 @@ size_t print_listint_safe(const listint_t *head)
  */
 size_t free_listint_safe(listint_t **h)
 {
-	size_t count = 0;
-	listint_t *temp;
+    size_t count = 0;
+    listint_t *temp;
 
-	while (*h)
-	{
-		temp = *h;
-		*h = (*h)->next;
-		free(temp);
-		count++;
-	}
-	return (count);
+    while (*h)
+    {
+        temp = *h;
+        *h = (*h)->next;
+        free(temp);
+        count++;
+    }
+    return (count);
 }
 
 /**
@@ -72,26 +102,28 @@ size_t free_listint_safe(listint_t **h)
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	listint_t *tortoise = head;
-	listint_t *hare = head;
+    listint_t *tortoise = head;
+    listint_t *hare = head;
 
-	{
-		tortoise = tortoise->next;
-		hare = hare->next->next;
+    while (hare != NULL && hare->next != NULL)
 
-		if (tortoise == hare)
-			break;
-	}
+    {
+        tortoise = tortoise->next;
+        hare = hare->next->next;
 
-	if (hare == NULL || hare->next == NULL)
-		return (NULL);
+        if (tortoise == hare)
+            break;
+    }
 
-	tortoise = head;
-	while (tortoise != hare)
-	{
-		tortoise = tortoise->next;
-		hare = hare->next;
-	}
+    if (hare == NULL || hare->next == NULL)
+        return (NULL);
 
-	return (tortoise);
+    tortoise = head;
+    while (tortoise != hare)
+    {
+        tortoise = tortoise->next;
+        hare = hare->next;
+    }
+
+    return (tortoise);
 }

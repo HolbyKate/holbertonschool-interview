@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "lists.h"
 
 /**
@@ -11,12 +9,16 @@
  */
 listint_t *add_nodeint(listint_t **head, const int n)
 {
-	listint_t *new_node = malloc(sizeof(listint_t));
+	listint_t *new_node;
+
+    new_node = (listint_t *)malloc(sizeof(listint_t));
 	if (!new_node)
 		return (NULL);
+
 	new_node->n = n;
 	new_node->next = *head;
 	*head = new_node;
+
 	return (new_node);
 }
 
@@ -72,7 +74,6 @@ listint_t *find_listint_loop(listint_t *head)
 	listint_t *tortoise = head;
 	listint_t *hare = head;
 
-	// Phase 1: Determine if a loop exists
 	while (hare != NULL && hare->next != NULL)
 	{
 		tortoise = tortoise->next;
@@ -82,11 +83,9 @@ listint_t *find_listint_loop(listint_t *head)
 			break;
 	}
 
-	// If hare reached the end, there is no loop
 	if (hare == NULL || hare->next == NULL)
-		return NULL;
+		return (NULL);
 
-	// Phase 2: Find the start of the loop
 	tortoise = head;
 	while (tortoise != hare)
 	{
@@ -94,6 +93,5 @@ listint_t *find_listint_loop(listint_t *head)
 		hare = hare->next;
 	}
 
-	// Both pointers are now at the start of the loop
-	return tortoise;
+	return (tortoise);
 }

@@ -13,11 +13,12 @@ int get_max(int *array, size_t size)
 {
 	int max = array[0];
 	for (size_t i = 1; i < size; i++)
+
 	{
 		if (array[i] > max)
 			max = array[i];
 	}
-	return max;
+	return (max);
 }
 
 /**

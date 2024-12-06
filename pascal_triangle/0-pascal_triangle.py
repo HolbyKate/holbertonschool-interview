@@ -5,7 +5,7 @@ Function that returns a list of lists of integers like a Pascal's triangle
 
 
 def pascal_triangle(n):
-    # Returns empty if negative or null
+    """ Returns empty if negative or null """
     if n <= 0:
         return []
 

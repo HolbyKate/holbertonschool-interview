@@ -10,7 +10,7 @@
  * Return: 1 if matches, else 0
  */
 
-Int regex_match(char const *str, char const *pattern) {
+int regex_match(char const *str, char const *pattern) {
 	if (str == NULL || pattern == NULL)
 		return 0;
 	return regex_match_recursive(str, pattern);

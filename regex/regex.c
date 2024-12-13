@@ -12,11 +12,15 @@
 
 
 int regex_match_recursive(char const *str, char const *pattern) {
+
+	if (str == NULL || pattern == NULL)
+		return 0;
+
 	/* At the end, we have a match */
 	if (*pattern == '\0')
 		return (*str == '\0');
 
-	int has_star = (pattern[1] == '*');
+	int has_star = *(pattern + 1) == '*';
 
 	/* If there is no star process pattern*/
 	if (!has_star) {
@@ -40,4 +44,11 @@ int regex_match_recursive(char const *str, char const *pattern) {
 	return 0;
 }
 
+int regex_match(char const *str, char const *pattern)
+{
+	if (str == NULL || pattern == NULL)
+		return 0;
+
+	return regex_match_recursive(str, pattern);
+}
 

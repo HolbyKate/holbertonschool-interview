@@ -10,12 +10,6 @@
  * Return: 1 if matches, else 0
  */
 
-int regex_match(char const *str, char const *pattern) {
-	if (str == NULL || pattern == NULL)
-		return 0;
-	return regex_match_recursive(str, pattern);
-}
-
 
 int regex_match_recursive(char const *str, char const *pattern) {
 	/* At the end, we have a match */

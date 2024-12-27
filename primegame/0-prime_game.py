@@ -23,3 +23,35 @@ def isWinner(x, nums):
         return 'Ben'
     else:
         return None
+
+
+def is_prime(n):
+    """Check if a number is prime"""
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
+def get_primes_up_to(n):
+    """Get list of prime numbers up to n using Sieve of Eratosthenes"""
+    sieve = [True] * (n + 1)
+    sieve[0] = sieve[1] = False
+
+    for i in range(2, int(n ** 0.5) + 1):
+        if sieve[i]:
+            for j in range(i * i, n + 1, i):
+                sieve[j] = False
+
+    return [i for i in range(2, n + 1) if sieve[i]]
+
+
+def play_round(n):
+    """Simulate a single round of the game"""
+    if n < 2:
+        return 'Ben'
+    primes = get_primes_up_to(n)
+    moves = len(primes)
+    return 'Maria' if moves % 2 == 1 else 'Ben'
